@@ -1,0 +1,244 @@
+# import information to use tkinter and create basic canvas to do project on
+from tkinter import *
+root = Tk()
+screen = Canvas(root)
+screen.pack()
+canvas = Canvas(root, width = 500, height = 100, bg = "white")
+name = str(input("What is the name for the order? "))
+amount_money = float(input("How much money do you have?: $"))
+canvas.create_text(250, 15, text= "Initial amount of money: $" + str(amount_money), fill ="black", font=("times",10))
+canvas.pack()
+
+#create lists
+reciept_value = []
+reciept_items = []
+
+# make a function that enables the user to add their selection to a list
+# add a process that allows the user to select items in bulk
+# make sure user can not go over the amount of money they have
+
+
+
+
+def make_selection(x):
+    global amount_money
+    global number_of_items
+    if amount_money < x:
+        print ("Sorry, you do not have enough money for that. Please select another item or checkout.")
+        return amount_money
+    else:
+        number_of_items = int(input("How many of this item would you like? "))
+        if amount_money < number_of_items * x:
+            print ("Sorry, you do not have enough money for that. Please select another amount of that item, another item, or checkout.")
+            return amount_money
+        else:
+            for i in range(number_of_items):
+                amount_money = amount_money - x 
+                amount_money= round(amount_money, 2)
+                reciept_value.append(x)
+    return amount_money
+
+
+
+# create a closing function and also a way to print the receipt values
+
+
+
+def check_out():
+    
+    canvas.create_text(250, 30, text= str(name) + " ordered: ", fill ="black", font=("times",10))
+    canvas.create_text(250, 45, text= "Amount of money left: $" + str(amount_money), fill ="black", font=("times",7))
+    canvas.create_text(250, 60, text= "Amount of money spent: $" + str(reciept_value), fill ="black", font=("times",7))
+    canvas.create_text(250, 75, text= "Items bought: " + str(reciept_items), fill ="black", font=("times",7))
+
+
+
+
+# Next few functions create a function for each item sold and attach a value
+# ensure the function appends the value into the receipts (both lists)
+def french_fries_value():
+    global number_of_items
+    global fries
+    fries = 2.99
+    make_selection(fries)
+    reciept_items.append('french fries x' + str(number_of_items))
+    print ("Money left: " + str(amount_money))
+    
+def donut_value():
+    global number_of_items
+    global donut
+    donut = 5.79
+    make_selection(donut)
+    reciept_items.append('donut x' + str(number_of_items))
+    print ("Money left: " + str(amount_money))
+    
+def pizza_value():
+    global number_of_items
+    global pizza
+    pizza = 8.49
+    make_selection(pizza)
+    reciept_items.append('pizza x' + str(number_of_items))
+    print ("Money left: " + str(amount_money))
+
+def sandwich_value():
+    global number_of_items
+    global sandwich
+    sandwich = 7.99
+    make_selection(sandwich)
+    reciept_items.append('sandwich x' + str(number_of_items))
+    print ("Money left: " + str(amount_money))
+
+def salad_value():
+    global number_of_items
+    global salad
+    salad = 7.99
+    make_selection(salad)
+    reciept_items.append('salad x' + str(number_of_items))
+    print ("Money left: " + str(amount_money))
+
+def hot_dog_value():
+    global number_of_items
+    global dog
+    dog = 3.99
+    make_selection(dog)
+    reciept_items.append('dog x' + str(number_of_items))
+    print ("Money left: " + str(amount_money))
+
+def soft_drink_value():
+    global number_of_items
+    global drink
+    drink = 0.99
+    make_selection(drink)
+    reciept_items.append('soft drink x' + str(number_of_items))
+    print ("Money left: " + str(amount_money))
+
+def cookie_value():
+    global number_of_items
+    global cookie
+    cookie = 1.99
+    make_selection(cookie)
+    reciept_items.append('cookie x' + str(number_of_items))
+    print ("Money left: " + str(amount_money))
+
+#button = if click, function happens
+# The following functions, learned off of youtube, 
+#create a button for each item and connect it with values from above
+def click_fries():
+    french_fries_value()
+
+button = Button(root,
+text="french fries- $2.99",
+command=click_fries,
+font=("Comic Sans", 7),
+fg="#000000",
+bg="yellow",
+activeforeground="#000000",
+activebackground="yellow")
+button.pack()
+
+def click_donut():
+    donut_value()
+    
+button1 = Button(root,
+text="donut- $5.79",
+command=click_donut,
+font=("Comic Sans", 7),
+fg="#000000",
+bg="purple",
+activeforeground="#000000",
+activebackground="purple")
+button1.pack()
+
+def click_pizza():
+    pizza_value()
+    
+button2 = Button(root,
+text="pizza- $8.49",
+command=click_pizza,
+font=("Comic Sans", 7),
+fg="#000000",
+bg="orange",
+activeforeground="#000000",
+activebackground="orange")
+button2.pack()
+
+def click_sandwich():
+    sandwich_value()
+    
+button3 = Button(root,
+text="sandwich- $7.99",
+command=click_sandwich,
+font=("Comic Sans", 7),
+fg="#000000",
+bg="red",
+activeforeground="#000000",
+activebackground="red")
+button3.pack()
+
+def click_salad():
+    salad_value()
+    
+button4 = Button(root,
+text="salad- $7.99",
+command=click_salad,
+font=("Comic Sans", 7),
+fg="#000000",
+bg="green",
+activeforeground="#000000",
+activebackground="green")
+button4.pack()
+
+def click_dog():
+    hot_dog_value()
+    
+button5 = Button(root,
+text="hot dog- $3.99",
+command=click_dog,
+font=("Comic Sans", 7),
+fg="#000000",
+bg="brown",
+activeforeground="#000000",
+activebackground="brown")
+button5.pack()
+
+def click_drink():
+    soft_drink_value()
+    
+button6 = Button(root,
+text="soft drink- $0.99",
+command=click_drink,
+font=("Comic Sans", 7),
+fg="#000000",
+bg="white",
+activeforeground="#000000",
+activebackground="white")
+button6.pack()
+
+def click_cookie():
+    cookie_value()
+    
+button7 = Button(root,
+text="cookie- $1.99",
+command=click_cookie,
+font=("Comic Sans", 7),
+fg="#000000",
+bg="blue",
+activeforeground="#000000",
+activebackground="blue")
+button7.pack()
+
+def click_check_out():
+    check_out()
+
+button8 = Button(root,
+text="check out",
+command=click_check_out,
+font=("Comic Sans", 10),
+fg="#000000",
+bg="pink",
+activeforeground="#000000",
+activebackground="pink")
+button8.pack()
+
+#make sure the code can be run in this window or language
+root.mainloop()
